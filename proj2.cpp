@@ -1,13 +1,3 @@
-// proj2.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-//#include <iostream>
-//
-//int main()
-//{
-//    std::cout << "Hello World!\n";
-//}
-
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
@@ -26,6 +16,7 @@
 #include <stdlib.h> // randomize, rand
 #include <windows.h> // SetConsoleOutputCP(1251); SetConsoleCP(1251);
 #include <time.h>
+#include <ctype.h>
 #include "functions.h"
 #pragma warning(disable: 4996)
 //------------------------------------------------------------------------------
@@ -79,8 +70,8 @@ int main() {
                 printf("Один из сте.ов пуст, сначала заполните все сте.и.\n");
             }
             else {
-                StackTop3 = Decide(&StackTop1, &StackTop2);
-                fflush(stdin);
+                StackTop3 = decide_almeln(&StackTop1, &StackTop2); //     Decide(&StackTop1, &StackTop2);  //
+                flush_input();
                 break;
                 printf("Создан третий сте. \n");
             }
@@ -95,8 +86,17 @@ int main() {
             printf("Вся память освобождена под новые сте.и.\n");
             break;
             //------------------------------------------------------------------------------
+        case 'E':
+            StackTop1 = FreeStack(StackTop1);
+            StackTop2 = FreeStack(StackTop2);
+            StackTop3 = FreeStack(StackTop3);
+            break;
+            //------------------------------------------------------------------------------
         default:
-            printf("Та.ой .оманды нет, повторите попыт.у\n");
+            if (!isspace(ch))
+            {
+                printf("Та.ой .оманды нет, повторите попыт.у\n");
+            }
             //------------------------------------------------------------------------------
         }
     } while (ch != 'E');
